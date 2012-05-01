@@ -3,23 +3,48 @@
     <head>
         <meta charset="UTF-8" />
         <title>Functional tests for shadowdom.js</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="../src/shadowdom.js"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
-        <script>
-        </script>
     </head>
     <body>
-        <h1>Benchmarks</h1>
-        <table id="profile-results" border="1">
-            <thead>
-                <tr>
-                    <th>Test</th>
-                    <th>Iterations</th>
-                    <th>Run time</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <h1>Functional tests</h1>
+        <div id="test-1"></div>
     </body>
+
+    <style>
+    iframe {
+        background: #eee;
+        height: 500px;
+        width: 500px;
+    }
+    </style>
+    <!--
+    "+shadowdom" serves to prevent the browser from parsing the CSS for the host document.
+    for <link> tags, the rel works but not the type.
+    on the style tags, the type works, but not the rel.. ಠ_ಠ
+    -->
+    <link type="text/css+shadowdom" rel="stylesheet+shadowdom" href="http://paraskiflex.com/static/website/css/site.css" />
+    <style type="text/css+shadowdom" rel="stylesheet+shadowdom">
+        html {
+            background: #ff9;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        p {
+            background: #c30;
+        }
+    </style>
+    <script type="text/javascript+shadowdom">
+        alert('should not alert')
+    </script>
+    <script type="text/javascript">
+    $(function(){
+        $('#test-1').shadowdom().append($('<p>TES<b>T</b></p>'))
+    });
+    </script>
 </html>
 
