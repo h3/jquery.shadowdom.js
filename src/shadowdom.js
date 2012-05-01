@@ -18,7 +18,7 @@
         $('style[type="text/css+shadowdom"]').each(function(){
             var block = $(this);
             if (!block.attr('id')) {
-                $('<style type="text/css" />').appendTo(el).text(block.text());
+                $('<style type="text/css" />').insertAfter(el).text(block.text());
             }
         });
         return el;
@@ -39,7 +39,7 @@
             else {
                 now   = new Date();
                 id    = "shadowdom-" + now.getTime() + now.getMilliseconds();
-                frame = $('<iframe src="about:blank" class="shadowdom-container" />').attr('id', id).prependTo(root);
+                frame = $('<iframe src="about:blank" class="shadowdom-container"><script>alert("what");</script></iframe>').attr('id', id).prependTo(root);
                 root.data('shadowdom-id', id).addClass('has-shadowdom');
 
                 frame.find('html, body').css({margin:0,padding:0});

@@ -52,3 +52,23 @@ Loading CSS is quite straight forward too::
 It is required to add it to the `type` and `rel` attribute. In fact specifying it twice
 is not necessary, but I advise it to avoid confusion because for `<link>` tags, the rel 
 works but not the type whereas on the `<style>` tags, the type works, but not the rel.. `ಠ_ಠ`
+
+
+Loading JS
+^^^^^^^^^^
+
+I did not find an elegant way to load JavaScript into an iframe. The trick I use for CSS 
+doesn't work. That said, loading JavaScript into the iframe it not that useful since it 
+can't communicate with its parent window.
+
+So it's better to manipulate the shadowdoms from the outside like this::
+
+
+    $(function(){
+        $('.toolbars').shadowdom().find('a.button')
+            .bind('click', function() {
+                // Do your stuff ..
+            });
+    });
+
+
