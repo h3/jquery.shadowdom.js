@@ -9,10 +9,16 @@
 (function () {
 
     var injectCSS = function(el) {
+        $('link[type="text/css+shadowdom"]').each(function(){
+            var link = $(this);
+            if (!link.attr('id')) {
+                $('<link type="text/css" rel="stylesheet" />').attr('href', link.attr('href')).insertAfter(el);
+            }
+        });
         $('style[type="text/css+shadowdom"]').each(function(){
             var block = $(this);
             if (!block.attr('id')) {
-                $('<style>').appendTo(el).text(block.text())
+                $('<style type="text/css" />').appendTo(el).text(block.text());
             }
         });
         return el;

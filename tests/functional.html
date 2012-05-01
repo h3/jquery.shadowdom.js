@@ -18,15 +18,8 @@
         width: 500px;
     }
     </style>
-    <!--
-    "+shadowdom" serves to prevent the browser from parsing the CSS for the host document.
-    for <link> tags, the rel works but not the type.
-    on the style tags, the type works, but not the rel.. ಠ_ಠ
-    -->
-    <link type="text/css+shadowdom" rel="stylesheet+shadowdom" href="http://paraskiflex.com/static/website/css/site.css" />
     <style type="text/css+shadowdom" rel="stylesheet+shadowdom">
         html {
-            background: #ff9;
             margin: 0;
             padding: 0;
         }
