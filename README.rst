@@ -57,7 +57,7 @@ works but not the type whereas on the `<style>` tags, the type works, but not th
 Loading JS
 ^^^^^^^^^^
 
-I did not find an elegant way to load JavaScript into an iframe. The trick I use for CSS 
+I did not found an elegant way to load JavaScript into an iframe. The trick I use for CSS 
 doesn't work. That said, loading JavaScript into the iframe it not that useful since it 
 can't communicate with its parent window.
 
