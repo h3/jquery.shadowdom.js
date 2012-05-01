@@ -30,23 +30,15 @@
                 root = $(this);
             if (root.hasClass('has-shadowdom') && root.data('shadowdom-id')) {
                 frame = $('#'+ root.data('shadowdom-id'), root);
-                if (!frame.get(0)) {
-                    root.removeClass('has-shadowdom')
-                    $(this).data('shadowdom-id', false)
-                    return root.shadowdom();
-                }
             }
             else {
                 now   = new Date();
                 id    = "shadowdom-" + now.getTime() + now.getMilliseconds();
-                frame = $('<iframe src="about:blank" class="shadowdom-container"><script>alert("what");</script></iframe>').attr('id', id).prependTo(root);
+                frame = $('<iframe class="shadowdom-container" />').attr('id', id).prependTo(root);
+                frame.contents().append($('<div id="test2">test</div>'))
                 root.data('shadowdom-id', id).addClass('has-shadowdom');
-
-                frame.find('html, body').css({margin:0,padding:0});
-
             }
-            body = frame.contents()
-                    .find('body');
+            body = frame.contents().find('body');
             injectCSS(body);
             return body;
         }
