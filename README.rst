@@ -1,4 +1,4 @@
-js-shadowdom
-============
+jquery.shadowdom.js
+===================
 
-Experiment trying to emulate the encapsulation of the shadow DOM
+jQuery experiment trying to emulate the encapsulation of the shadow DOM
