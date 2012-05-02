@@ -5,39 +5,47 @@
         <title>Functional tests for shadowdom.js</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="../src/shadowdom.js"></script>
+        <style>
+        iframe {
+            background: #eee;
+            height: 500px;
+            width: 500px;
+            border: 1px solid #ccc;
+        }
+        </style>
+        <style type="text/css+shadowdom" rel="stylesheet+shadowdom">
+            html {
+                margin: 0;
+                padding: 0;
+                border: 1px solid #ccc;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            p {
+                background: #c30;
+                color: #fff;
+            }
+        </style>
+        <script type="text/javascript">
+        $(function(){
+          $('#test-1').shadowdom({
+            // Not functional yet..
+            resizeToContent: true, 
+            width: '100%',
+            height: 'auto',
+          });
+        });
+        </script>
     </head>
     <body>
         <h1>Functional tests</h1>
-        <div id="test-1"></div>
+        <iframe id="test-1" border="0">
+            <p><b>this should be red.</b></p>
+        </iframe>
         
+        <p><b>this should not.</b></p>
     </body>
-
-    <style>
-    iframe {
-        background: #eee;
-        height: 500px;
-        width: 500px;
-    }
-    </style>
-    <style type="text/css+shadowdom" rel="stylesheet+shadowdom">
-        html {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        p {
-            background: #c30;
-        }
-    </style>
-    <script type="text/javascript+shadowdom">
-        alert('should not alert')
-    </script>
-    <script type="text/javascript">
-                 $('#test-1').shadowdom()
-                 $('#test-1').shadowdom().append($('<p>TES<b>T</b></p>'));
-    </script>
 </html>
 

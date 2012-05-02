@@ -5,7 +5,6 @@
  *
  * */
 
-
 (function () {
 
     var injectCSS = function(el) {
@@ -26,20 +25,19 @@
 
     $.extend($.fn, {
         shadowdom: function () {
-            var frame, body, now, id,
-                root = $(this);
-            if (root.hasClass('has-shadowdom') && root.data('shadowdom-id')) {
-                frame = $('#'+ root.data('shadowdom-id'), root);
+            var now, id, 
+                frame = $(this),
+                body  = frame.contents().find('body');
+
+            if (!frame.hasClass('shadowdom')) {
+                now = new Date();
+                frame.attr('id', 'shadowdom-' + now.getTime() + now.getMilliseconds())
+                     .attr('frameborder', 0)
+                     .addClass('shadowdom');
+                body.html(frame.text())
+                injectCSS(body);
             }
-            else {
-                now   = new Date();
-                id    = "shadowdom-" + now.getTime() + now.getMilliseconds();
-                frame = $('<iframe class="shadowdom-container" />').attr('id', id).prependTo(root);
-                frame.contents().append($('<div id="test2">test</div>'))
-                root.data('shadowdom-id', id).addClass('has-shadowdom');
-            }
-            body = frame.contents().find('body');
-            injectCSS(body);
+
             return body;
         }
     });

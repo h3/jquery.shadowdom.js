@@ -18,21 +18,38 @@ TL;DR: Sometimes you want to have a self contained html component. Something
 Examples
 ========
 
-Basic
-^^^^^
 
-Let's say you have a `div#test` in your webpage. To create a shadowdom element and
-then create and insert a html element into it simple do::
+Loading HTML
+^^^^^^^^^^^^
 
+To preload HTML into the iframe we use a little dirty trick (which makes it 
+incompatible with IE unfortunately..).
+
+We simply declare it in the iframe::
+
+    <iframe id="test" border="0">
+        <p>Hello <b>World</b></p>
+    </iframe>
+
+    <script type="text/javascript">
     $(function(){
-        var myElement = $('<b>Yay.</b>');
-        $('#test').shadowdom().append(myElement);
+        $('#test').shadowdom();
     });
+    </script>
 
-In the background, the shadowdom method returns the body of the shadowdom iframe
-if the iframe exists or else it creates it and return its body.
+At page load, the text content of the iframe is injected back into itself, effectively
+rendering it.
 
-So the manipulation is pretty standard stuff.
+Once rendered you can manipulate HTML and bind events normaly, but you have to use the
+`shadowdom` function to access them::
+
+    <script type="text/javascript">
+    $(function(){
+        $('#test').shadowdom()
+            .find('p').bind('click', doSomethingCallback);
+    });
+    </script>
+
 
 Loading CSS
 ^^^^^^^^^^^
